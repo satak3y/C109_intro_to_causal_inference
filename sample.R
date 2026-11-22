@@ -1,4 +1,4 @@
-# install.packages(c("broom", "dplyr"))
+# install.packages(c("broom", "dplyr")) #自分の環境にこのライブラリがインストールされていない場合、左の#を消して実行する
 library(broom)
 library(dplyr)
 
@@ -29,7 +29,7 @@ coefficients_df <- bind_rows(base = tidy(base), with_season = tidy(with_season),
                              .id = "model")
 print(select(coefficients_df, model, term, estimate), n = Inf)
 
-# 4. Gelbach分解：「調整後 − 調整前」への寄与 = −完全モデルの係数 × 群間平均差。
+# 4. Gelbach分解：「調整後 − 調整前」への寄与 = −完全モデルの係数 × グループ間平均差。
 # mean_gap[term] で各変数の平均差を取り出す。100倍してパーセントポイントに直す。
 gelbach_df <- tidy(full) |>
   filter(term %in% covariates) |>
